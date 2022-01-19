@@ -18,3 +18,6 @@ def power_gravity(b, landing):
 
     if bottom >= landing:
         wrap.sprite.move_bottom_to(b["ID"],landing)
+
+def jump(b):
+    b["speed"]=-8
