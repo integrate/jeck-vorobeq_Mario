@@ -19,5 +19,16 @@ def power_gravity(b, landing):
     if bottom >= landing:
         wrap.sprite.move_bottom_to(b["ID"],landing)
 
-def jump(b):
-    b["speed"]=-8
+def jump(b,landing):
+    y_landing=wrap.sprite.get_bottom(b["ID"])
+    print(y_landing)
+    if y_landing ==landing:
+        b["speed"] = -8
+
+def move_left(b):
+    wrap.sprite.move(b["ID"],-5,0)
+
+def move_right(b):
+    wrap.sprite.move(b["ID"],5,0)
+
+
