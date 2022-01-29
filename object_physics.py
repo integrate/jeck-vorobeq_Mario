@@ -10,7 +10,7 @@ def create_physics(sprite, x, y, costum, speed):
     return a
 
 
-def power_gravity(b, landing):
+def power_gravity(b,mod, landing):
     wrap.sprite.move(b["ID"], 0, b["speed"])
     b["speed"] += 1
     bottom = wrap.sprite.get_bottom(b["ID"])
@@ -18,6 +18,8 @@ def power_gravity(b, landing):
 
     if bottom >= landing:
         wrap.sprite.move_bottom_to(b["ID"],landing)
+        mod.costum_stand(b)
+
 
 def jump(b,landing):
     y_landing=wrap.sprite.get_bottom(b["ID"])
