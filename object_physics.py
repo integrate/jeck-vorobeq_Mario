@@ -12,18 +12,21 @@ def create_physics(sprite, x, y, costum, speed):
 
 def power_gravity(b,mod, landing):
     wrap.sprite.move(b["ID"], 0, b["speed"])
-    b["speed"] += 1
     bottom = wrap.sprite.get_bottom(b["ID"])
+    if bottom < landing:
+        b["speed"] += 1
+
     # если y ОБЪЕКТА 480 или больше то телепорт. на 480
 
-    if bottom >= landing:
+    if bottom > landing:
+        b["speed"] = 0
         wrap.sprite.move_bottom_to(b["ID"],landing)
         mod.costum_stand(b)
 
 
 def jump(b,landing):
     y_landing=wrap.sprite.get_bottom(b["ID"])
-    print(y_landing)
+
     if y_landing ==landing:
         b["speed"] = -8
 

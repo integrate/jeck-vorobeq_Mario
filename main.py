@@ -1,3 +1,5 @@
+import time
+
 import wrap, object_physics, mario as mario_mod, dracon
 
 wrap.world.create_world(1900, 500)
@@ -11,7 +13,7 @@ lue = object_physics.create_physics("mario-enemies", 100, 0, "dragon_stand1", 0)
 def run_phisics():
     object_physics.power_gravity(mario, mario_mod, wrap.sprite.get_top(id))
     object_physics.power_gravity(lue, dracon, wrap.sprite.get_top(id))
-
+    print(mario["speed"])
 
 @wrap.on_key_down(wrap.K_w)
 def jump():
@@ -31,10 +33,16 @@ def move():
     mario_mod.povorot_left(mario)
 
 
-@wrap.on_key_always(wrap.K_d)
+@wrap.on_key_down(wrap.K_d)
 def move():
     object_physics.move_right(mario)
     mario_mod.povorot_right(mario)
+    r=mario["ID"]
+    ime=time.time()
+    wrap.sprite.set_costume(r,"walk2")
+    e=ime-time.time()
+    if e==0.5:
+        wrap.sprite.set_costume(r,"walk3")
 
 @wrap.on_key_always(wrap.K_LEFT)
 def move():
