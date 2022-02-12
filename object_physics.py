@@ -3,14 +3,14 @@ import random
 import wrap
 
 
-def create_physics(sprite, x, y, costum, speed):
+def create_physics(sprite,mod, x, y, costum, speed):
     marIo = wrap.sprite.add(sprite, x, y, costum)
-    a = {"ID": marIo, "speed": speed}
+    a = {"ID": marIo,"MOD":mod, "speed": speed}
 
     return a
 
 
-def power_gravity(b,mod, landing):
+def power_gravity(b, landing):
     wrap.sprite.move(b["ID"], 0, b["speed"])
     bottom = wrap.sprite.get_bottom(b["ID"])
     if bottom < landing:
@@ -21,14 +21,14 @@ def power_gravity(b,mod, landing):
     if bottom > landing:
         b["speed"] = 0
         wrap.sprite.move_bottom_to(b["ID"],landing)
-        mod.costum_stand(b)
+        b["MOD"].costum_stand(b)
 
 
 def jump(b,landing):
     y_landing=wrap.sprite.get_bottom(b["ID"])
-
+    b["MOD"].costum_jump(b)
     if y_landing ==landing:
-        b["speed"] = -8
+        b["speed"] = -20
 
 def move_left(b):
     wrap.sprite.move(b["ID"],-5,0)
