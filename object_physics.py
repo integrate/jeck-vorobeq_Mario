@@ -32,8 +32,13 @@ def jump(b,landing):
 
 def move_left(b):
     wrap.sprite.move(b["ID"],-5,0)
+    b["MOD"].povorot_left(b)
+    b["MOD"].beg(b)
+
+
 
 def move_right(b):
     wrap.sprite.move(b["ID"],5,0)
-
+    b["MOD"].povorot_right(b)
+    b["MOD"].beg(b)
 
