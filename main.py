@@ -6,7 +6,7 @@ id = wrap.sprite.add("mario-scenery", 100, 380, "block")
 cloud_platform = wrap.sprite.add("mario-items", 500, 200, "cloud_platform")
 cloud_platform2 = wrap.sprite.add("mario-items", 600, 300, "cloud_platform")
 cloud_platform3 = wrap.sprite.add("mario-items", 400, 100, "cloud_platform")
-mario = object_physics.create_physics("mario-1-small", mario_mod, 100, 200, "stand", -8)
+mario = object_physics.create_physics("mario-1-small", mario_mod, 550, 200, "stand", -8)
 lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0)
 grounds_list=[cloud_platform ,cloud_platform2,cloud_platform3]
 
@@ -40,8 +40,27 @@ def move():
 
 def look_earth():
     for a in grounds_list:
-        wrap.sprite.remove(a)
 
+        left_mario=wrap.sprite.get_left(mario["ID"])
+        right_plat=wrap.sprite.get_right(a)
+        if right_plat < left_mario:
+            wrap.sprite.remove(a)
+            grounds_list.remove(a)
+
+    for a in grounds_list:
+        right_mario = wrap.sprite.get_right(mario["ID"])
+        left_plat = wrap.sprite.get_left(a)
+        if left_plat > right_mario:
+            wrap.sprite.remove(a)
+            grounds_list.remove(a)
+
+    for a in grounds_list:
+        bottom_plat = wrap.sprite.get_bottom(a)
+        top_mario = wrap.sprite.get_top(mario["ID"])
+        if  bottom_plat > top_mario:
+            wrap.sprite.remove(a)
+            grounds_list.remove(a)
+# хотели Далее: переписать условие удаления островов, которые выше
 
 @wrap.on_key_always(wrap.K_LEFT)
 def move():
