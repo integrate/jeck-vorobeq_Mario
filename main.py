@@ -39,27 +39,39 @@ def move():
 
 
 def look_earth():
-    for a in grounds_list:
+    gl=list(grounds_list)
+    for a in gl:
 
         left_mario=wrap.sprite.get_left(mario["ID"])
         right_plat=wrap.sprite.get_right(a)
         if right_plat < left_mario:
-            wrap.sprite.remove(a)
-            grounds_list.remove(a)
+            #wrap.sprite.remove(a)
+            gl.remove(a)
 
-    for a in grounds_list:
+    for a in gl:
         right_mario = wrap.sprite.get_right(mario["ID"])
         left_plat = wrap.sprite.get_left(a)
         if left_plat > right_mario:
-            wrap.sprite.remove(a)
-            grounds_list.remove(a)
+            #wrap.sprite.remove(a)
+            gl.remove(a)
 
-    for a in grounds_list:
+    for a in gl:
         bottom_plat = wrap.sprite.get_bottom(a)
         top_mario = wrap.sprite.get_top(mario["ID"])
-        if  bottom_plat > top_mario:
-            wrap.sprite.remove(a)
-            grounds_list.remove(a)
+        if  bottom_plat < top_mario:
+            #wrap.sprite.remove(a)
+            gl.remove(a)
+
+    if len(gl)>0:
+        max=wrap.sprite.get_top(gl[0])
+        for a in gl:
+            top=wrap.sprite.get_top(a)
+            if max < top:
+                max = top
+
+    else:
+        max=500
+    print(max)
 # хотели Далее: переписать условие удаления островов, которые выше
 
 @wrap.on_key_always(wrap.K_LEFT)
