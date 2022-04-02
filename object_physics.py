@@ -79,5 +79,5 @@ def look_earth(mario):
 
     else:
         max = 500
-    print(max)
+
     mario["landing"] = max

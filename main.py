@@ -13,18 +13,18 @@ mario = object_physics.create_physics("mario-1-small", mario_mod, 400, 50, "stan
 #lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0,wrap.sprite.get_top(id))
 lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0,300,grounds_list)
 vode=None
-@wrap.on_key_down(wrap.K_1)
+
 def odin():
     global vode
     vode=1
 
 
-@wrap.on_key_down(wrap.K_2)
+
 def dva():
     global vode
     vode=2
 
-@wrap.always()
+
 def voda():
     if vode == 1:
         STRELKA.ykaz_strelk(mario)
@@ -37,7 +37,7 @@ def run_phisics():
     object_physics.power_gravity(mario)
 
     object_physics.power_gravity(lue)
-
+    voda()
 @wrap.on_key_down(wrap.K_w)
 def jump():
     object_physics.jump(mario)
@@ -53,25 +53,27 @@ def jump():
 def move():
 
     object_physics.move_left(mario)
-
+    voda()
 
 
 
 @wrap.on_key_always(wrap.K_d)
 def move():
     object_physics.move_right(mario)
-
+    voda()
 @wrap.on_key_always(wrap.K_LEFT)
 def move():
 
     object_physics.move_left(lue)
-
+    voda()
 
 
 
 @wrap.on_key_always(wrap.K_RIGHT)
 def move():
     object_physics.move_right(lue)
+    voda()
 
 
-
+#def pered_str():
+    #wrap.sprite.is_collide_sprite()
