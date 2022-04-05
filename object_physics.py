@@ -64,9 +64,9 @@ def look_earth(mario):
             gl.remove(a)
 
     for a in gl.copy():
-        bottom_plat = wrap.sprite.get_bottom(a)
-        top_mario = wrap.sprite.get_top(mario["ID"])
-        if bottom_plat < top_mario:
+        top_plat = wrap.sprite.get_top(a)
+        bottom_mario = wrap.sprite.get_bottom(mario["ID"])
+        if top_plat < bottom_mario:
             # wrap.sprite.remove(a)
             gl.remove(a)
 
@@ -74,7 +74,7 @@ def look_earth(mario):
         max = wrap.sprite.get_top(gl[0])
         for a in gl:
             top = wrap.sprite.get_top(a)
-            if max < top:
+            if top< max:
                 max = top
 
     else:

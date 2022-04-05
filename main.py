@@ -5,10 +5,14 @@ wrap.world.create_world(1350, 500)
 import object_physics, mario as mario_mod, dracon,STRELKA
 wrap.world.set_back_image("img.png")
 id = wrap.sprite.add("mario-scenery", 100, 380, "block")
+id1 = wrap.sprite.add("mario-scenery", 1100, 380, "block")
 cloud_platform = wrap.sprite.add("mario-items", 500, 200, "cloud_platform")
 cloud_platform2 = wrap.sprite.add("mario-items", 600, 300, "cloud_platform")
 cloud_platform3 = wrap.sprite.add("mario-items", 400, 100, "cloud_platform")
-grounds_list=[cloud_platform ,cloud_platform2,cloud_platform3,id]
+cloud_platform4 = wrap.sprite.add("mario-items", 1000, 200, "cloud_platform")
+cloud_platform5 = wrap.sprite.add("mario-items", 1200, 300, "cloud_platform")
+cloud_platform6 = wrap.sprite.add("mario-items", 600, 100, "cloud_platform")
+grounds_list=[cloud_platform ,cloud_platform2,cloud_platform3,id,id1,cloud_platform4 ,cloud_platform5,cloud_platform6]
 mario = object_physics.create_physics("mario-1-small", mario_mod, 400, 50, "stand", -8,200,grounds_list)
 #lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0,wrap.sprite.get_top(id))
 lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0,300,grounds_list)
@@ -74,6 +78,14 @@ def move():
     object_physics.move_right(lue)
     voda()
 
+@wrap.always
+def pered_str():
+    global vode
+    collide_strelka = wrap.sprite.is_collide_sprite(lue["ID"], mario["ID"])
+    if vode==1 and collide_strelka==True:
+        vode=2
+        wrap.sprite.move_to(lue["ID"], 1100, -1600)
+    elif collide_strelka == True:
+        vode=1
+        wrap.sprite.move_to(mario["ID"],100,-1600)
 
-#def pered_str():
-    #wrap.sprite.is_collide_sprite()
