@@ -4,6 +4,9 @@ wrap.world.create_world(1350, 500)
 
 import object_physics, mario as mario_mod, dracon,STRELKA
 wrap.world.set_back_image("img.png")
+seconds=60
+seconde=seconds-1
+schet=wrap.sprite.add_text(str(seconde), 600, 450, text_color=[255, 255, 255], font_size=50)
 id = wrap.sprite.add("mario-scenery", 100, 380, "block")
 id1 = wrap.sprite.add("mario-scenery", 1100, 380, "block")
 cloud_platform = wrap.sprite.add("mario-items", 500, 200, "cloud_platform")
@@ -88,4 +91,13 @@ def pered_str():
     elif collide_strelka == True:
         vode=1
         wrap.sprite.move_to(mario["ID"],100,-1600)
+@wrap.always(1000)
+def schetchik():
+    global seconde,schet
+    wrap.sprite.remove(schet)
+    seconde = seconde - 1
+    schet = wrap.sprite.add_text(str(seconde), 600, 450, text_color=[255, 255, 255], font_size=50)
+
+
+
 
