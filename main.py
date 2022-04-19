@@ -8,6 +8,10 @@ import object_physics, mario as mario_mod, dracon, STRELKA
 wrap.world.set_back_image("img.png")
 seconds = 10
 seconde = seconds - 1
+schet_lue = 0
+schet_mario = 0
+rounds_lue = wrap.sprite.add_text(str(0), 1200, 50, text_color=[255, 255, 255], font_size=50)
+rounds_mario = wrap.sprite.add_text(str(0), 100, 50, text_color=[255, 255, 255], font_size=50)
 schet = wrap.sprite.add_text(str(seconde), 600, 450, text_color=[255, 255, 255], font_size=50)
 id = wrap.sprite.add("mario-scenery", 100, 380, "block")
 id1 = wrap.sprite.add("mario-scenery", 1100, 380, "block")
@@ -18,11 +22,13 @@ cloud_platform4 = wrap.sprite.add("mario-items", 1000, 200, "cloud_platform")
 cloud_platform5 = wrap.sprite.add("mario-items", 1200, 300, "cloud_platform")
 cloud_platform6 = wrap.sprite.add("mario-items", 600, 100, "cloud_platform")
 death = wrap.sprite.add("img_1", 100, 200, "img", False)
+dragon = wrap.sprite.add("mario-enemies", 1200, 160, "dragon_stand1")
+merio = wrap.sprite.add("mario-1-small", 100, 160, "stand")
 grounds_list = [cloud_platform, cloud_platform2, cloud_platform3, id, id1, cloud_platform4, cloud_platform5,
                 cloud_platform6]
-mario = object_physics.create_physics("mario-1-small", mario_mod, 400, 50, "stand", -8, 200, grounds_list)
+mario = object_physics.create_physics("mario-1-small", mario_mod, 100, 370, "stand", -8, 200, grounds_list)
 # lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0,wrap.sprite.get_top(id))
-lue = object_physics.create_physics("mario-enemies", dracon, 100, 0, "dragon_stand1", 0, 300, grounds_list)
+lue = object_physics.create_physics("mario-enemies", dracon, 1100, 370, "dragon_stand1", 0, 300, grounds_list)
 vode = 2
 
 
@@ -91,26 +97,29 @@ def pered_str():
 
 
 def death_who():
+    global schet_lue,schet_mario
 
-    if vode ==2 and seconde == 0:
+    if vode == 2 and seconde == 0:
+
+
         wrap.sprite.move_to(death, 1200, 100)
         wrap.sprite.show(death)
+        schet_lue+=1
+        wrap.sprite_text.set_text(rounds_lue,str (schet_lue))
+    if vode == 1 and seconde == 0:
 
-    if vode ==1 and seconde == 0:
         wrap.sprite.move_to(death, 100, 100)
         wrap.sprite.show(death)
+        schet_mario+=1
+        wrap.sprite_text.set_text(rounds_mario,str(schet_mario))
 
 
 @wrap.always(1000)
 def schetchik():
     global seconde, schet
+    if seconde<=0:
+        return
     wrap.sprite.remove(schet)
     seconde = seconde - 1
     schet = wrap.sprite.add_text(str(seconde), 600, 450, text_color=[255, 255, 255], font_size=50)
     death_who()
-
-@wrap.always
-def schetchik_rounds():
-
-     rounds_lue= wrap.sprite.add_text(str(0), 1200, 50, text_color=[255, 255, 255], font_size=50)
-     rounds_mario = wrap.sprite.add_text(str(0), 100, 50, text_color=[255, 255, 255], font_size=50)
