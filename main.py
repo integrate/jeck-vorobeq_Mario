@@ -6,7 +6,7 @@ wrap.world.create_world(1350, 500)
 import object_physics, mario as mario_mod, dracon, STRELKA
 
 wrap.world.set_back_image("img.png")
-seconds = 10
+seconds = 65
 seconde = seconds - 1
 schet_lue = 0
 schet_mario = 0
@@ -97,29 +97,38 @@ def pered_str():
 
 
 def death_who():
-    global schet_lue,schet_mario
-
+    global schet_lue, schet_mario, seconde
+    if schet_mario==3:
+        wrap.sprite.add_text("mario win",675,250,font_size=200,text_color=[125,125,125],back_color=[12,12,12])
+        exit()
+    if schet_lue==3:
+        wrap.sprite.add_text("dracon win",675,250,font_size=200,text_color=[125,125,125],back_color=[12,12,12])
+        exit()
     if vode == 2 and seconde == 0:
-
-
         wrap.sprite.move_to(death, 1200, 100)
         wrap.sprite.show(death)
-        schet_lue+=1
-        wrap.sprite_text.set_text(rounds_lue,str (schet_lue))
+        schet_mario += 1
+        wrap.sprite_text.set_text(rounds_mario, str(schet_mario))
     if vode == 1 and seconde == 0:
-
         wrap.sprite.move_to(death, 100, 100)
         wrap.sprite.show(death)
-        schet_mario+=1
-        wrap.sprite_text.set_text(rounds_mario,str(schet_mario))
+
+        schet_lue += 1
+        wrap.sprite_text.set_text(rounds_lue, str(schet_lue))
+    if seconde <= 0:
+        wrap.sprite.move_to(mario["ID"], 100, 330)
+        wrap.sprite.move_to(lue["ID"], 1100, 330)
+        seconde = seconds
+
 
 
 @wrap.always(1000)
 def schetchik():
     global seconde, schet
-    if seconde<=0:
+    if seconde <= 0:
         return
     wrap.sprite.remove(schet)
     seconde = seconde - 1
     schet = wrap.sprite.add_text(str(seconde), 600, 450, text_color=[255, 255, 255], font_size=50)
     death_who()
+
