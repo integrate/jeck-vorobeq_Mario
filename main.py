@@ -133,4 +133,4 @@ def schetchik():
     death_who()
 
 import wrap_py
-wrap_py.app.start()
+wrap_py.app.start()#sdf
