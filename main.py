@@ -40,7 +40,7 @@ def voda():
         STRELKA.ykaz_strelk(lue)
 
 
-@wrap.always
+@wrap.always(delay=10)
 def run_phisics():
     object_physics.power_gravity(mario)
 
@@ -58,25 +58,25 @@ def jump():
     object_physics.jump(lue)
 
 
-@wrap.on_key_always(wrap.K_a)
+@wrap.on_key_always(wrap.K_a, delay=10)
 def move():
     object_physics.move_left(mario)
     voda()
 
 
-@wrap.on_key_always(wrap.K_d)
+@wrap.on_key_always(wrap.K_d, delay=10)
 def move():
     object_physics.move_right(mario)
     voda()
 
 
-@wrap.on_key_always(wrap.K_LEFT)
+@wrap.on_key_always(wrap.K_LEFT, delay=10)
 def move():
     object_physics.move_left(lue)
     voda()
 
 
-@wrap.on_key_always(wrap.K_RIGHT)
+@wrap.on_key_always(wrap.K_RIGHT, delay=10)
 def move():
     object_physics.move_right(lue)
     voda()
@@ -132,3 +132,5 @@ def schetchik():
     schet = wrap.sprite.add_text(str(seconde), 600, 450, text_color=[255, 255, 255], font_size=50)
     death_who()
 
+import wrap_py
+wrap_py.app.start()
